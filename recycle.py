@@ -3,7 +3,7 @@
 #   APPLICATION INTIALIZATION
 #
 ######################################################################
-import os
+import os, datetime
 from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, session, url_for, redirect, \
      render_template, abort, g, flash, _app_ctx_stack
@@ -83,6 +83,17 @@ def get_day(uid):
                     [uid], one=True)
     return rv[0] if rv else None
 
+def get_inc_log(uid):
+    """Convenience method to look up inc_log for a uid."""
+    rv = query_db('select inc_log from user where uid = ?',
+                    [uid], one=True)
+    return rv[0] if rv else None
+
+def get_dec_log(uid):
+    """Convenience method to look up inc_log for a uid."""
+    rv = query_db('select dec_log from user where uid = ?',
+                    [uid], one=True)
+    return rv[0] if rv else None
 
 ######################################################################
 #
@@ -94,18 +105,50 @@ def get_day(uid):
 def increment_day(uid):
     """Increments the day value of a user in the database."""
     db = get_db()
+    print('date is')
+    print(datetime.datetime.utcnow())
     db.execute('''update user
-                set day = day + 1
-                where uid = ?;''', [session['uid']])
+                set day = day + 1, inc_log = ?
+                where uid = ?;''', [datetime.datetime.utcnow(), session['uid']])
     db.commit()
 
 def decrement_day(uid):
     """Decrements the day value of a user in the database."""
-    db = get_db()
-    db.execute('''update user
-                set day = day - 1
-                where uid = ?;''', [session['uid']])
-    db.commit()
+
+    #TODO: decrement ONLY once every 24 hours
+
+    if get_day(uid) != 1:
+        db = get_db()
+        db.execute('''update user
+                    set day = day - 1, dec_log = ?
+                    where uid = ?;''', [datetime.datetime.utcnow(), session['uid']])
+        db.commit()
+
+def update_state(uid):
+    """Check to see when the user last recycled, and update state if necessary."""
+    #get the current time
+    now = datetime.datetime.utcnow()
+
+    #get the previous time, convert to correct datetime format
+    last_inc = datetime.datetime.strptime(get_inc_log(uid), '%Y-%m-%d %H:%M:%S.%f')
+    last_dec = last_inc
+
+    if get_dec_log(uid) != None:
+        last_dec = datetime.datetime.strptime(get_dec_log(uid), '%Y-%m-%d %H:%M:%S.%f')
+
+    inc_diff = now - last_inc
+    dec_diff = now - last_dec
+
+    #determine correct timestamp difference
+    if dec_diff == inc_diff:
+        print("We need to decrement the state")
+        decrement_day(uid)
+    elif inc_diff.seconds > 10 and dec_diff.seconds > 10:   #TODO:
+        print("We need to decrement the state")
+        decrement_day(uid)
+    else:
+        print("We do not need to decrement the state, do nothing")
+
 
 ######################################################################
 #
@@ -114,6 +157,8 @@ def decrement_day(uid):
 ######################################################################
 @app.route('/')
 def user_home():
+    #check to see when they last recycled
+    update_state(session['uid'])
     return render_template('user_home.html', user = query_db('''select user.* from user where
         uid = ?''', [session['uid']]))
 
@@ -137,8 +182,7 @@ def register():
     if request.method == 'POST':
         if not request.form['username']:
             error = 'You have to enter a username'
-        elif not request.form['email'] or \
-                '@' not in request.form['email']:
+        elif not request.form['email'] or '@' not in request.form['email']:
             error = 'You have to enter a valid email address'
         elif not request.form['password']:
             error = 'You have to enter a password'
@@ -153,7 +197,7 @@ def register():
               [request.form['username'], request.form['email'],
                generate_password_hash(request.form['password'])])
             db.commit()
-            flash('You were successfully registered and can login now')
+            # flash('You were successfully registered and can login now')
             return redirect(url_for('login'))
     return render_template('register.html', error=error)
 
@@ -169,12 +213,11 @@ def login():
             username = ?''', [request.form['username']], one=True)
         if user is None:
             error = 'Invalid username'
-        elif not check_password_hash(user['pw_hash'],
-                                     request.form['password']):
+        elif not check_password_hash(user['pw_hash'], request.form['password']):
             error = 'Invalid password'
         else:
-            print('\nELSE\n')
-            flash('You were logged in')
+            # print('\nELSE\n')
+            # flash('You were logged in')
             session['uid'] = user['uid']
             return redirect(url_for('user_home'))
     return render_template('login.html', error=error)
