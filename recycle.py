@@ -97,17 +97,21 @@ def get_dec_log(uid):
     return rv[0] if rv else None
 
 def get_phase(uid):
-    day = get_day(uid)
-    if day <= 5:
-        return 1
-    elif day >= 6 and day <= 10:
-        return 2
-    elif day >= 11 and day <= 15:
-        return 3
-    elif day >= 16 and day <= 20:
-        return 4
-    else:
-        return 5
+    """Convenience method to look up phase for a uid."""
+    rv = query_db('select phase from user where uid = ?',
+                    [uid], one=True)
+    return rv[0] if rv else None
+    # day = get_day(uid)
+    # if day <= 5:
+    #     return 1
+    # elif day >= 6 and day <= 10:
+    #     return 2
+    # elif day >= 11 and day <= 15:
+    #     return 3
+    # elif day >= 16 and day <= 20:
+    #     return 4
+    # else:
+    #     return 5
 
 ######################################################################
 #
@@ -115,7 +119,36 @@ def get_phase(uid):
 #
 ######################################################################
 
-# def get_phase(username):
+def set_phase(uid):
+    """Sets the phase of a user in the database."""
+    db = get_db()
+    day = get_day(uid)
+    print("DAY IS")
+    print(day)
+    if day <= 5:
+        db.execute('''update user
+                    set phase = 1
+                    where uid = ?;''', [session['uid']])
+        db.commit()
+    elif day >= 6 and day <= 10:
+        db.execute('''update user
+                    set phase = 2
+                    where uid = ?;''', [session['uid']])
+        db.commit()
+    elif day >= 11 and day <= 15:
+        db.execute('''update user
+                    set phase = 3
+                    where uid = ?;''', [session['uid']])
+    elif day >= 16 and day <= 20:
+        db.execute('''update user
+                    set phase = 4
+                    where uid = ?;''', [session['uid']])
+    else:
+        db.execute('''update user
+                    set phase = 5
+                    where uid = ?;''', [session['uid']])
+    db.commit()
+
 def increment_day(uid):
     """Increments the day value of a user in the database."""
     db = get_db()
@@ -125,6 +158,7 @@ def increment_day(uid):
                 set day = day + 1, inc_log = ?
                 where uid = ?;''', [datetime.datetime.utcnow(), session['uid']])
     db.commit()
+    set_phase(uid)
 
 def decrement_day(uid):
     """Decrements the day value of a user in the database."""
@@ -136,7 +170,9 @@ def decrement_day(uid):
         db.execute('''update user
                     set day = day - 1, dec_log = ?
                     where uid = ?;''', [datetime.datetime.utcnow(), session['uid']])
+
         db.commit()
+        set_phase(uid)
 
 def update_state(uid):
     """Check to see when the user last recycled, and update state if necessary."""
@@ -145,10 +181,11 @@ def update_state(uid):
 
     #get the previous time, convert to correct datetime format
     last_inc = datetime.datetime.strptime(get_inc_log(uid), '%Y-%m-%d %H:%M:%S.%f')
-    last_dec = last_inc
+    last_dec = datetime.datetime.strptime(get_dec_log(uid), '%Y-%m-%d %H:%M:%S.%f')
+    # last_dec = last_inc
 
-    if get_dec_log(uid) != None:
-        last_dec = datetime.datetime.strptime(get_dec_log(uid), '%Y-%m-%d %H:%M:%S.%f')
+    # if get_dec_log(uid) != None:
+    #     last_dec = datetime.datetime.strptime(get_dec_log(uid), '%Y-%m-%d %H:%M:%S.%f')
 
     inc_diff = now - last_inc
     dec_diff = now - last_dec
@@ -176,10 +213,12 @@ def public_home():
 @app.route('/home')
 def user_home():
     # print(get_phase(session['uid']) > 2)
+    print("I AM HERE")
     if get_phase(session['uid']) == 5:
         print("final phase")
         return render_template('complete.html')
-    #check to see when they last recycled
+
+    #update the user state if necessary
     update_state(session['uid'])
     return render_template('user_home.html', user = query_db('''select user.* from user where
         uid = ?''', [session['uid']]))
@@ -192,7 +231,7 @@ def recycle():
 @app.route('/near-me')
 def near_me():
     return render_template('near_me.html')
-    
+
 #   USER ACCOUNT FUNCTIONS
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -215,9 +254,9 @@ def register():
         else:
             db = get_db()
             db.execute('''insert into user (
-              username, email, pw_hash, day) values (?, ?, ?, 1)''',
+              username, email, pw_hash, day, inc_log, dec_log, phase) values (?, ?, ?, 1, ?, ?, 1)''',
               [request.form['username'], request.form['email'],
-               generate_password_hash(request.form['password'])])
+               generate_password_hash(request.form['password']), datetime.datetime.utcnow(), datetime.datetime.utcnow()])
             db.commit()
             flash('You were successfully registered and can login now')
             return redirect(url_for('login'))
