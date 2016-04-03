@@ -8,11 +8,11 @@ from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, session, url_for, redirect, \
      render_template, abort, g, flash, _app_ctx_stack
 from werkzeug import check_password_hash, generate_password_hash
-from flask.ext.googlemaps import GoogleMaps
+
 
 # create our application
 app = Flask(__name__)
-GoogleMaps(app)
+
 
 # configuration
 app.config.update(dict(
@@ -192,6 +192,10 @@ def recycle():
 @app.route('/near-me')
 def near_me():
     return render_template('near_me.html')
+
+@app.route('/mappy')
+def go_mappy():
+    return render_template('mappy.html')
     
 #   USER ACCOUNT FUNCTIONS
 
