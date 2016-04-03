@@ -1,0 +1,9 @@
+.nav-title {
+    font-size: 2em !important;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+}
+
+.navigation {
+    padding: 5px;
+}

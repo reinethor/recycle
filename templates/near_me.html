@@ -1,0 +1,21 @@
+
+{% extends "layout.html" %}
+{% block title %}Sign In{% endblock %}
+{% block body %}
+
+{% with %}
+
+    {% set location=(35.9100692,-79.0520795) %}
+    {% set style="width:100%;height:500px;" %}
+
+    {{
+    googlemap(
+        "simple-map",
+        location.0, location.1,
+        markers=[location,],
+        style=style
+        )
+    }}
+{% endwith %}
+
+{% endblock %}

@@ -8,10 +8,11 @@ from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, session, url_for, redirect, \
      render_template, abort, g, flash, _app_ctx_stack
 from werkzeug import check_password_hash, generate_password_hash
-
+from flask.ext.googlemaps import GoogleMaps
 
 # create our application
 app = Flask(__name__)
+GoogleMaps(app)
 
 # configuration
 app.config.update(dict(
@@ -168,6 +169,10 @@ def update_state(uid):
 #   WEBPAGES
 #
 ######################################################################
+@app.route('/')
+def public_home():
+    return render_template('public_home.html')
+
 @app.route('/home')
 def user_home():
     # print(get_phase(session['uid']) > 2)
@@ -179,16 +184,16 @@ def user_home():
     return render_template('user_home.html', user = query_db('''select user.* from user where
         uid = ?''', [session['uid']]))
 
-@app.route('/')
-def public_home():
-    return render_template('public_home.html')
-
 @app.route('/recycle')
 def recycle():
     increment_day(session['uid'])
     return redirect(url_for('user_home'))
 
-#   USER ACCOUNTS
+@app.route('/near-me')
+def near_me():
+    return render_template('near_me.html')
+    
+#   USER ACCOUNT FUNCTIONS
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
