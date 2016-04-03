@@ -1,0 +1,11 @@
+{% for info in user %}
+
+ user home page! <br>
+ You are on day {{ info.day }} <br>
+ <a href="{{ url_for('logout') }}">sign out [{{ g.user.username }}]</a>
+
+{% endfor %}
+<br>
+<a href="{{ url_for('recycle') }}">recycle!</a>
+<br>
+<a href="{{ url_for('recycle') }}">un-recycle!</a>
