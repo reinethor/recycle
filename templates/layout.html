@@ -21,7 +21,7 @@
 <body>
     <nav class="navbar navbar-default navbar-fixed-top navigation">
      <div class="container-fluid">
-         <a href="#" class="navbar-brand nav-title">recyclatory</a>
+         <a href="{{ url_for('public_home') }}" class="navbar-brand nav-title">recyclatory</a>
 
          <ul class="nav navbar-nav navbar-right">
              {% if g.user %}

@@ -81,7 +81,8 @@ a:hover {
 }
 
 .front-page {
-    background: #0160a0;
+    background-image: url("imgs/bg_front.jpg");
+    background-size: cover;
     min-height: 75%;
     padding: 100px 0 0 0;
     text-align: center;
