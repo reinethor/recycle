@@ -17,7 +17,7 @@ app = Flask(__name__)
 app.config.update(dict(
     DATABASE=os.path.join(app.root_path, 'users.db'),
     DEBUG=True,
-    SECRET_KEY='developer key',
+    SECRET_KEY='l\xc7\xbaz\xe4E\x96\x84\x13\xdf%',
 ))
 
 # define the user session
