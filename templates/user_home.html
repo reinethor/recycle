@@ -3,13 +3,50 @@
 {% block body %}
 {% for info in user %}
 
- user home page! <br>
- You are on day {{ info.day }} <br>
- <a href="{{ url_for('logout') }}">sign out [{{ g.user.username }}]</a>
 
+    {% if info.phase is equalto 1 %}
+
+    <section class="parallax phase phase1">
+        <div class="container">
+            <div>
+                <img src="static/imgs/phase1.png">
+    {% endif %}
+    {% if info.phase is equalto 2 %}
+
+    <section class="parallax phase phase2">
+        <div class="container">
+            <div>
+                <img src="static/imgs/phase2.png">
+    {% endif %}
+    {% if info.phase is equalto 3 %}
+
+    <section class="parallax phase phase3">
+        <div class="container">
+            <div>
+                <img src="static/imgs/phase3.png">
+    {% endif %}
+    {% if info.phase is equalto 4 %}
+
+    <section class="parallax phase phase4">
+        <div class="container">
+            <div>
+                <img src="static/imgs/phase4.png">
+    {% endif %}
+
+            </div>
+            <button class="btn btn-success recycle"><a href="{{ url_for('recycle') }}">Recycle Now</a></button>
+        </div>
+    </section>
+    <section class="scrolling content">
+        <div class="container">
+            user home page! <br>
+            You are on day {{ info.day }} <br>
+            You are in phase {{ info.phase }} <br>
+
+            <a href="{{ url_for('logout') }}">sign out [{{ g.user.username }}]</a>
+        </div>
+    </section>
 {% endfor %}
 <br>
-<a href="{{ url_for('recycle') }}">recycle!</a>
-<br>
-<a href="{{ url_for('recycle') }}">un-recycle!</a>
+<!-- <a href="">recycle!</a> -->
 {% endblock %}

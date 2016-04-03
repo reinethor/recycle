@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,300,600,700,100" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,400italic,300,600italic,700italic' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <link rel="stylesheet" type="text/javascript" src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}">
     <link rel="stylesheet" type="text/javascript" src="{{ url_for('static', filename='js/googlemaps.js') }}">
@@ -34,21 +35,9 @@
          </ul>
      </div>
     </nav>
-    <div class="page" style="margin-top: 50px">
-      <div class="navigation">
 
-      {% with flashes = get_flashed_messages() %}
-        {% if flashes %}
-          <ul class="flashes">
-          {% for message in flashes %}
-            <li>{{ message }}
-          {% endfor %}
-          </ul>
-        {% endif %}
-      {% endwith %}
-      <div class="body">
       {% block body %}{% endblock %}
-      </div>
+
       <div class="footer">
         Recyclatory &mdash; A Flask Application
       </div>
