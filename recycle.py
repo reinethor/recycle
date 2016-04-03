@@ -155,14 +155,14 @@ def update_state(uid):
 #   WEBPAGES
 #
 ######################################################################
-@app.route('/')
+@app.route('/home')
 def user_home():
     #check to see when they last recycled
     update_state(session['uid'])
     return render_template('user_home.html', user = query_db('''select user.* from user where
         uid = ?''', [session['uid']]))
 
-@app.route('/home')
+@app.route('/')
 def public_home():
     return render_template('public_home.html')
 
