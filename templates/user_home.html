@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block title %}Your World{% endblock %}
+{% block body %}
 {% for info in user %}
 
  user home page! <br>
@@ -11,3 +12,4 @@
 <a href="{{ url_for('recycle') }}">recycle!</a>
 <br>
 <a href="{{ url_for('recycle') }}">un-recycle!</a>
+{% endblock %}

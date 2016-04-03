@@ -170,13 +170,14 @@ def update_state(uid):
 ######################################################################
 @app.route('/home')
 def user_home():
+    # print(get_phase(session['uid']) > 2)
     if get_phase(session['uid']) == 5:
+        print("final phase")
         return render_template('complete.html')
-    else:
-        #check to see when they last recycled
-        update_state(session['uid'])
-        return render_template('user_home.html', user = query_db('''select user.* from user where
-            uid = ?''', [session['uid']]))
+    #check to see when they last recycled
+    update_state(session['uid'])
+    return render_template('user_home.html', user = query_db('''select user.* from user where
+        uid = ?''', [session['uid']]))
 
 @app.route('/')
 def public_home():
