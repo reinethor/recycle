@@ -7,6 +7,14 @@ body, html, main {
     font-weight: 300;
 }
 
+p {
+    line-height: 1.75em;
+}
+
+a:hover {
+    text-decoration: none !important;
+}
+
 .nav-title {
     font-size: 2em !important;
     font-family: 'Josefin Sans', sans-serif;
@@ -17,30 +25,38 @@ body, html, main {
     padding: 5px;
     background-color: rgba(255, 255, 255, 0.8) !important;
     font-weight: 400;
-	/*height: 54px;*/
 }
 
-
+.register {
+    padding: 100px 0;
+    min-height: 80%;
+    background-size: cover;
+    background-image: url("imgs/register_bg.jpg");
+}
 .recycle {
     margin: 30px 0 0 0;
-    padding: 10px 0 0 0;
-    width: 250px;
-    height: 75px;
+    padding: 15px !important;
+    width: 275px;
+    /*height: 75px;*/
     font-family: 'Josefin Sans', sans-serif;
     font-size: 2em !important;
     font-weight: bold;
     text-transform: uppercase;
+    vertical-align: middle;
+    display: block;
     vertical-align: middle;
 }
 
 .recycle a {
     color: #ffffff;
     text-decoration: none;
+    display: block !important;
 }
 
 .recycle a:hover {
     color: #ffffff;
     text-decoration: none;
+    display: block;
 }
 
 .parallax {
@@ -50,28 +66,67 @@ body, html, main {
     background-repeat: no-repeat;
     background-position: center center;
     text-align: center;
-    padding: 90px 0 0 0;
+    padding: 70px 0 0 0;
+}
+
+.parallax p {
+    padding: 20px;
+    color: #ffffff;
 }
 
 .scrolling {
-    min-height: 100%;
+    min-height: 50%;
     margin: 0;
     padding: 50px 0;
 }
 
+.front-page {
+    background: #0160a0;
+    min-height: 75%;
+    padding: 100px 0 0 0;
+    text-align: center;
+    color: #ffffff;
+}
+
+.front-page h1 {
+    color: #ffffff;
+    font-weight: 300;
+    margin: 30px 0;
+}
+.front-page-content {
+    background: #ffffff;
+    min-height: 25%;
+    padding: 50px 0;
+}
+
+.content h1 {
+    margin: 0 0 60px 0;
+}
+
 .footer {
-     background: #00527F;
+     background: #2e2e2e;
      margin: 0;
      padding: 20px;
      color: #ffffff;
+     text-align: center;
 }
 
 .content {
     background: #2e2e2e;
     color: #ffffff;
 }
+
+.content a {
+    color: #59aaff;
+}
+
+.content a:hover {
+    color: #498bd3;
+    text-decoration: none;
+}
+
 .phase img {
-    width: 48%;
+    width: 46%;
 }
 
 .phase1 {
@@ -88,4 +143,8 @@ body, html, main {
 
 .phase4 {
     background-image: url("imgs/bg_4.jpg");
+}
+
+.phase5 {
+    background-image: url("imgs/bg_5.jpg");
 }

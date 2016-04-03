@@ -25,13 +25,13 @@
 
          <ul class="nav navbar-nav navbar-right">
              {% if g.user %}
-             <li><a href="{{ url_for('user_home') }}">Hello, {{ g.user.username }}!</a></li>
-             <li><a href="{{ url_for('logout') }}">sign out</a></li>
+             <li><a href="{{ url_for('user_home') }}">Hello, {{ g.user.username }}</a></li>
+             <li><a href="{{ url_for('logout') }}">Log out</a></li>
              {% else %}
              <li><a href="{{ url_for('register') }}">Register</a></li>
              <li><a href="{{ url_for('login') }}">Login</a></li>
              {% endif %}
-             <li><a href="#">Near Me</a></li>
+             <!-- <li><a href="#">Near Me</a></li> -->
          </ul>
      </div>
     </nav>
@@ -39,6 +39,7 @@
       {% block body %}{% endblock %}
 
       <div class="footer">
+        <img src="static/imgs/logo.png" width="100"> <br><br>
         Recyclatory &mdash; A Flask Application
       </div>
     </div>

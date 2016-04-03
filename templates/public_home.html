@@ -1,5 +1,28 @@
 {% extends "layout.html" %}
-{% block title %}Sign In{% endblock %}
+{% block title %}Welcome{% endblock %}
 {% block body %}
- <a href="{{ url_for('login') }}">sign in</a>
+<section class="scrolling front-page">
+    <div class="container">
+        <img src="static/imgs/logo.png" width="200">
+        <h1>Welcome to Recyclatory!</h1>
+        <p>We don’t know what you’ve been told about recycling, but this is what we do know. It can be fun. </p>
+    </div>
+</section>
+<section class="scrolling front-page-content">
+    <div class="container">
+        <p class="lead">Here, your mission is to make your world a more beautiful place — literally. </p>
+        <p>
+            Each user will begin with a world that has been plagued with trash for years, and is now in a filthy state of dismay.
+        </p>
+        <p>
+            Your real-life objective will be to develop a sustainable habit of recycling. Every day you log your recycling activity, your world will become healthier. On the contrary, every day you neglect to recycle, your world will begin to spiral to its demise.
+        </p>
+        <p>
+            After a habit has been formed, or 21 days, you’ll will be congratulated for your success. At that point, you will have saved your virtual planet from destruction, and you’ll be equipped to continue your new found habit of recycling to rescue our physical space on Earth.
+        </p>
+        <p class="lead">
+            <a href="{{ url_for('register') }}">Register now</a> to start your journey.</a>
+        </p>
+    </div>
+</section>
 {% endblock %}

@@ -10,6 +10,62 @@
         <div class="container">
             <div>
                 <img src="static/imgs/phase1.png">
+            </div>
+            <!-- <button class="btn btn-success recycle"> -->
+                <a href="{{ url_for('recycle') }}" class="btn btn-success recycle">Recycle Now <i class="glyphicon glyphicon-leaf"></i></a>
+            <!-- </button> <br> -->
+            <p><i class="glyphicon glyphicon-menu-down"></i>
+                scroll down to see how you better our planet
+            <i class="glyphicon glyphicon-menu-down"></i></p>
+        </div>
+    </section>
+    <section class="scrolling content">
+        <div class="container">
+            <h1 style="text-align: center;">You are on <span style="color: #e47771; font-weight: 600">Day {{ info.day }}</span> of the 21 Day Challenge</h1>
+            {% if info.day is equalto 1 %}
+                <p class="lead">What resources do I have to recycle near me?</p>
+            {% endif %}
+            {% if info.day is equalto 2 %}
+                <p class="lead">Recycling isn’t just tossing your soda bottle into a recycling can. </p>
+                <p>
+                    It’s actively using reusable resources, too, such as: reusable water bottles or grocery bags.
+                    Do you have more creative ideas for every day reusable resources? Share them with us using #recyclatory!
+                </p>
+            {% endif %}
+            {% if info.day is equalto 3 %}
+                <p class="lead">What’s recyclable? </p>
+                <p>
+                    According to <a href="http://www.wm.com/thinkgreen/what-can-i-recycle.jsp">Waste Management</a>,
+                    there are many things beyond plastic and paper that you can recycle.
+                    When was the last time you recycled any metals, cardboard, glass, batteries, bulbs and electronics?
+                </p>
+            {% endif %}
+            {% if info.day is equalto 4 %}
+                <p class="lead">Metals</p>
+                <p>
+                    According to Waste Management, cans (aluminum, steel and tin) and aluminum foil and bakeware can all be recycled.
+                    Next time you crack open a can of your favorite energy drink or soda, be sure to remember it can be recycled.
+                </p>
+            {% endif %}
+            {% if info.day is equalto 5 %}
+            <p class="lead">Cardboard</p>
+            <p>
+                According to Waste Management, there are a lot of categories of paper that need recycling that we don’t often remember. \
+                Do you recognize any of these frequently thrown away items?
+            </p>
+            <ul>
+                <li> corrugated cardboard</li>
+                <li> magazines </li>
+                <li> office paper </li>
+                <li> newspapers </li>
+                <li> paperboard (cereal boxes, etc.) </li>
+                <li> paper cardboard (milk cartons) </li>
+                <li> junk mail </li>
+                <li> phone books </li>
+            </ul>
+            {% endif %}
+        </div>
+    </section>
     {% endif %}
     {% if info.phase is equalto 2 %}
 
@@ -17,6 +73,56 @@
         <div class="container">
             <div>
                 <img src="static/imgs/phase2.png">
+            </div>
+            <button class="btn btn-success recycle">
+                <a href="{{ url_for('recycle') }}">Recycle Now <i class="glyphicon glyphicon-leaf"></i></a>
+            </button> <br>
+            <p><i class="glyphicon glyphicon-menu-down"></i>
+                scroll down to see how you better our planet
+            <i class="glyphicon glyphicon-menu-down"></i></p>
+        </div>
+    </section>
+    <section class="scrolling content">
+        <div class="container">
+            <h1 style="text-align: center;">You are on <span style="color: #e47771; font-weight: 600">Day {{ info.day }}</span> of the 21 Day Challenge</h1>
+            {% if info.day is equalto 6 %}
+            <p class="lead" style="text-align: center">
+                You’ve hit your first milestone! Don’t stop now. Do something — recycle.
+            </p>
+            {% endif %}
+            {% if info.day is equalto 7 %}
+            <p class="lead">Glass</p>
+            <p>There are three basic types of glass: flint, amber and emerald.
+                No matter what type of glass it is, before it’s recycled, it must be broken down into smaller pieces.
+                For this reason, you shouldn’t place mixed colors of glass into your recycling bin.
+                Once it’s mixed up, there’s no easy method of organization again.
+            </p>
+            {% endif %}
+            {% if info.day is equalto 8 %}
+            <p class="lead">Batteries</p>
+            <p>If you don’t recycle batteries because it’s more complicated than rolling a bin to the street,
+                then maybe rechargeable batteries would be worth the investment.
+            </p>
+            {% endif %}
+            {% if info.day is equalto 9 %}
+            <p class="lead">Bulbs</p>
+            <p>
+                “If every home in America replaced just one incandescent light bulb with an ENERGY STAR qualified CFL,
+                in one year it would save enough energy to light more than 3 million homes,”
+                according to <a href="https://www.energystar.gov/ia/partners/promotions/change_light/downloads/Fact_Sheet_Mercury.pdf">Energy Star’s</a>
+                U.S. government webpage. “That would prevent the release of greenhouse gas emissions equal
+                to that of about 800,000 cars.”
+            </p>
+            {% endif %}
+            {% if info.day is equalto 10 %}
+            <p class="lead">Electronics</p>
+            <p>
+                Did you know that you can recycle many household appliances and electronics? You can!
+                Your old laptops, keyboards, printers, televisions, stereos and cell phones are all up for recycling business grabs.
+            </p>
+            {% endif %}
+        </div>
+    </section>
     {% endif %}
     {% if info.phase is equalto 3 %}
 
@@ -24,6 +130,76 @@
         <div class="container">
             <div>
                 <img src="static/imgs/phase3.png">
+            </div>
+            <button class="btn btn-success recycle">
+                <a href="{{ url_for('recycle') }}">Recycle Now <i class="glyphicon glyphicon-leaf"></i></a>
+            </button> <br>
+            <p><i class="glyphicon glyphicon-menu-down"></i>
+                scroll down to see how you better our planet
+            <i class="glyphicon glyphicon-menu-down"></i></p>
+        </div>
+    </section>
+    <section class="scrolling content">
+        <div class="container">
+            <h1 style="text-align: center;">You are on <span style="color: #e47771; font-weight: 600">Day {{ info.day }}</span> of the 21 Day Challenge</h1>
+
+            {% if info.day is equalto 11 %}
+            <p class="lead">Can you believe you’ve reached the halfway point of a new lifetime habit of recycling?</p>
+            <p>
+                Don’t stop now. Do something — recycle.
+            </p>
+            <p>
+                Don’t forget to share your success with friends on social media.
+            </p>
+            {% endif %}
+            {% if info.day is equalto 12 %}
+            <p class="lead">
+                Where does my recycling go? Are there factories in the U.S.?
+            </p>
+            <p>Watch this video to find out.</p>
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/b7GMpjx2jDQ"></iframe>
+            </div>
+            {% endif %}
+            {% if info.day is equalto 13 %}
+            <p class="lead">
+                How much waste is actually recycled?
+            </p>
+            <p>
+            Out of all of our waste America only recycles about a third of it.
+            This might not sound too bad, but <a href="http://www.mnn.com/lifestyle/recycling/blogs/how-much-does-america-recycle">Mother Nature Network</a>
+             puts it into perspective for us.</p>
+            <blockquote>“That's not bad, considering less than 7 percent of the country's trash was recycled in 1960, and nearly 94 percent of
+            it wound up in landfills. But since that 94 percent totaled only 82.5 million tons, and today's 54 percent totals 132 million
+            tons, it's clear the job is far from finished.”</blockquote>
+            {% endif %}
+            {% if info.day is equalto 14 %}
+            <p class="lead">
+                How much waste is actually recycled?
+            </p>
+            <blockquote>
+                “Recycling one aluminum can saves enough energy to listen to a full album on your iPod,”
+            </blockquote>
+            <p>
+                 according to
+                <a href="https://www.dosomething.org/us/facts/11-facts-about-recycling">DoSomething.org</a>.
+                “Recycling 100 cans could light your bedroom for two whole weeks.”
+            </p>
+            {% endif %}
+            {% if info.day is equalto 15 %}
+            <p class="lead">
+                Zero Waste Town
+            </p>
+
+            <p>
+                What if you could eliminate waste, as a whole? Would you do it? That’s what
+                <a href="http://www.citylab.com/politics/2015/12/let-this-japanese-town-show-you-how-zero-waste-is-done/419706/">
+                this town in Japan</a> did.
+            </p>
+            {% endif %}
+    </div
+        </div>
+    </section>
     {% endif %}
     {% if info.phase is equalto 4 %}
 
@@ -31,22 +207,80 @@
         <div class="container">
             <div>
                 <img src="static/imgs/phase4.png">
-    {% endif %}
-
             </div>
-            <button class="btn btn-success recycle"><a href="{{ url_for('recycle') }}">Recycle Now</a></button>
+            <button class="btn btn-success recycle">
+                <a href="{{ url_for('recycle') }}">Recycle Now <i class="glyphicon glyphicon-leaf"></i></a>
+            </button> <br>
+            <p><i class="glyphicon glyphicon-menu-down"></i>
+                scroll down to see how you better our planet
+            <i class="glyphicon glyphicon-menu-down"></i></p>
         </div>
     </section>
     <section class="scrolling content">
         <div class="container">
-            user home page! <br>
-            You are on day {{ info.day }} <br>
-            You are in phase {{ info.phase }} <br>
+            <h1 style="text-align: center;">You are on <span style="color: #e47771; font-weight: 600">Day {{ info.day }}</span> of the 21 Day Challenge</h1>
 
-            <a href="{{ url_for('logout') }}">sign out [{{ g.user.username }}]</a>
+            {% if info.day is equalto 16 %}
+            <p class="lead">
+                 You’re three quarters of the way to saving the world!
+            </p>
+
+            <p>
+                And in the recycling world, 75 cents is a lot. Was that a cheap joke? But seriously, don’t stop now. Do something — recycle.
+            </p>
+            {% endif %}
+            {% if info.day is equalto 17 %}
+            <p class="lead">
+                 Resources
+            </p>
+            <p>
+                We’d like to introduce you to some pretty cool friends.
+                These are a few non-profit organizations who focus on recycling and improving our world!
+            </p>
+            <ul>
+                <li><a href="https://www.dosomething.org/us">Do Something</a></li>
+                <li><a href="http://nrcrecycles.org/">NRC Recycles</a></li>
+                <li><a href="https://cleantheworld.org/">Clean the World</a></li>
+                <li><a href="http://www.call2recycle.org/">Call 2 Recycle</a></li>
+            </ul>
+            {% endif %}
+            {% if info.day is equalto 18 %}
+            <p class="lead">
+                 Economic impact of recycling
+            </p>
+            <p>
+                In 2015, the U.S. conducted a economic impact study on the scrap recycling industry.
+                It found that in North Carolina alone, the industry created 4,881 direct jobs.
+                What to know what the report meant for your state?
+                <a href="http://www.isri.org/docs/default-source/recycling-analysis-(reports-studies)/economic-impact-study-u-s-based-scrap-recycling-industry-2015.pdf?sfvrsn=10">
+                    Check it out here.
+                </a>
+            </p>
+            {% endif %}
+            {% if info.day is equalto 19 %}
+            <p class="lead">
+                 Green Business
+            </p>
+            <p>
+                Are you a business owner or entrepreneur? Your company can be part of the solution.
+                Find out how to become a green business
+                <a href="http://www.greenbusinessnetwork.org/about/whats-a-green-business/">here</a>.
+            </p>
+            {% endif %}
+            {% if info.day is equalto 20 %}
+            <p class="lead">
+                See what our friends at the Natural Resources Defense Council have to say.
+            </p>
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/e1Zs2lMcXLY"></iframe>
+            </div>
+            {% endif %}
+
         </div>
     </section>
+    {% endif %}
+
+
 {% endfor %}
-<br>
 <!-- <a href="">recycle!</a> -->
 {% endblock %}
