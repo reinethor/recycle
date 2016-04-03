@@ -17,7 +17,7 @@ app = Flask(__name__)
 app.config.update(dict(
     DATABASE=os.path.join(app.root_path, 'users.db'),
     DEBUG=True,
-    SECRET_KEY='developer key',
+    SECRET_KEY='l\xc7\xbaz\xe4E\x96\x84\x13\xdf%',
 ))
 
 # define the user session
@@ -95,9 +95,22 @@ def get_dec_log(uid):
                     [uid], one=True)
     return rv[0] if rv else None
 
+def get_phase(uid):
+    day = get_day(uid)
+    if day <= 5:
+        return 1
+    elif day >= 6 and day <= 10:
+        return 2
+    elif day >= 11 and day <= 15:
+        return 3
+    elif day >= 16 and day <= 20:
+        return 4
+    else:
+        return 5
+
 ######################################################################
 #
-#   APP RELATED
+#   MODIFIERS
 #
 ######################################################################
 
@@ -157,10 +170,13 @@ def update_state(uid):
 ######################################################################
 @app.route('/home')
 def user_home():
-    #check to see when they last recycled
-    update_state(session['uid'])
-    return render_template('user_home.html', user = query_db('''select user.* from user where
-        uid = ?''', [session['uid']]))
+    if get_phase(session['uid']) == 5:
+        return render_template('complete.html')
+    else:
+        #check to see when they last recycled
+        update_state(session['uid'])
+        return render_template('user_home.html', user = query_db('''select user.* from user where
+            uid = ?''', [session['uid']]))
 
 @app.route('/')
 def public_home():
@@ -197,7 +213,7 @@ def register():
               [request.form['username'], request.form['email'],
                generate_password_hash(request.form['password'])])
             db.commit()
-            # flash('You were successfully registered and can login now')
+            flash('You were successfully registered and can login now')
             return redirect(url_for('login'))
     return render_template('register.html', error=error)
 
@@ -217,7 +233,7 @@ def login():
             error = 'Invalid password'
         else:
             # print('\nELSE\n')
-            # flash('You were logged in')
+            flash('You were logged in')
             session['uid'] = user['uid']
             return redirect(url_for('user_home'))
     return render_template('login.html', error=error)
